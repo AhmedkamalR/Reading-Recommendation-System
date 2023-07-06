@@ -15,6 +15,9 @@ export class BookRepository {
     return this.bookRepository.save({ ...bookRequestDto });
   }
 
+  async saveBook(bookRequestDto: BookRequestDto): Promise<Book> {
+    return this.bookRepository.save(bookRequestDto);
+  }
   async getBookById(id: number): Promise<Book> {
     return this.bookRepository.findOne({ where: { id } });
   }

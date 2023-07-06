@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, Put, UseGuards, Param } from '@nestjs/common';
 import { BookService } from '../services/books.service';
 import { BookRequestDto } from '../dto/book.dto';
 import { Roles } from 'src/auth/roles.decorator';
@@ -14,5 +14,15 @@ export class BooksController {
   @Post()
   async addBook(@Body() bookRequestDto: BookRequestDto) {
     return await this.booksService.createBook(bookRequestDto);
+  }
+
+  @Roles(Role.Admin)
+  @UseGuards(RolesGuard)
+  @Put('/:id')
+  async modifyBook(
+    @Body() bookRequestDto: BookRequestDto,
+    @Param('id') id: string,
+  ) {
+    return await this.booksService.modifyBook(bookRequestDto, id);
   }
 }
