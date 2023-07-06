@@ -5,10 +5,14 @@ import { AppError } from 'src/util/error';
 import { ResponseCode } from 'src/util/response';
 import * as bcrypt from 'bcrypt';
 import { UserRequestDto, UserResponseDto } from 'src/auth/dto/user.dto';
+import { CryptService } from './crypt.service';
 
 @Injectable()
 export class UserService {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    private userRepository: UserRepository,
+    private cryptService: CryptService,
+  ) {}
 
   async signIn({
     username,
@@ -23,18 +27,21 @@ export class UserService {
     if (!isMatch) {
       throw new AppError('Invalid password', ResponseCode.BAD_REQUEST);
     }
-
-    return new UserResponseDto(user);
+    const token = await this.cryptService.generateAuthToken(user);
+    return new UserResponseDto(user, token);
   }
 
   async signUp(username: string, password: string): Promise<UserResponseDto> {
     const user = await this.userRepository.getUserByname(username);
     if (user) {
-      return new UserResponseDto(user);
+      const token = await this.cryptService.generateAuthToken(user);
+      return new UserResponseDto(user, token);
     }
 
     const newUser = await this.userRepository.createUser(username, password);
-    return new UserResponseDto(newUser);
+    const token = await this.cryptService.generateAuthToken(user);
+
+    return new UserResponseDto(newUser, token);
   }
 
   async getUserById(id: number): Promise<User> {

@@ -14,11 +14,21 @@ import { LoggingService } from './services/logging.service';
 import ormconfig from '../config/orm.config.development';
 import { UsersController } from './controllers/users.controller';
 import { CryptService } from './services/crypt.service';
+import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule } from '@nestjs/config';
+
+console.log(process.env.JWT_SECRET);
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot(ormconfig),
     TypeOrmModule.forFeature([User, UserRepository, Book, ReadingInterval]),
+    JwtModule.register({
+      global: true,
+      secret: process.env.JWT_SECRET || 'JWT_SECRET',
+      signOptions: { expiresIn: '10h' },
+    }),
   ],
   controllers: [ReadingRecommendationController, UsersController],
   providers: [

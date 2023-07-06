@@ -20,7 +20,4 @@ export class User {
 
   @Column({ default: UserRoles.USER })
   role: string;
-
-  @Column({ nullable: true })
-  hash: string;
 }

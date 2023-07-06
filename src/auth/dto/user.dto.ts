@@ -4,11 +4,13 @@ export class UserResponseDto {
   public username: string;
   public role: string;
   public id: number;
+  public token: string;
 
-  constructor(user: User) {
+  constructor(user: User, token: string) {
     this.username = user.username;
     this.role = user.role;
     this.id = user.id;
+    this.token = token;
   }
 }
 
