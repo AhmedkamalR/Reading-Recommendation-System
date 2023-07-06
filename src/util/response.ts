@@ -11,4 +11,5 @@ export enum ResponseCode {
   SUCCESS = 200,
   NOT_FOUND = 404,
   BAD_REQUEST = 403,
+  UNAUTHORIZED = 401,
 }

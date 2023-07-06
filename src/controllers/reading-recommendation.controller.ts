@@ -1,11 +1,13 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { ReadingIntervalService } from '../services/reading-intervals.service';
-import { AppResponse } from 'src/util/response';
+import { AppResponse } from '../util/response';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('reading-intervals')
 export class ReadingRecommendationController {
   constructor(private readingIntervalService: ReadingIntervalService) {}
 
+  @UseGuards(AuthGuard)
   @Post('submit-interval')
   async submitReadingInterval(
     @Body('user_id') user_id: number,
@@ -22,6 +24,7 @@ export class ReadingRecommendationController {
     return { status_code: 'success' };
   }
 
+  @UseGuards(AuthGuard)
   @Get('top-books')
   async getTopRecommendedBooks(): Promise<AppResponse> {
     return this.readingIntervalService.getTopRecommendedBooks();

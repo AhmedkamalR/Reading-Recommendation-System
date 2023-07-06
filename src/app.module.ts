@@ -16,6 +16,7 @@ import { UsersController } from './controllers/users.controller';
 import { CryptService } from './services/crypt.service';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
+import { AuthGuard } from './auth/auth.guard';
 
 console.log(process.env.JWT_SECRET);
 
@@ -40,6 +41,7 @@ console.log(process.env.JWT_SECRET);
     ReadingIntervalRepository,
     LoggingService,
     CryptService,
+    AuthGuard,
   ],
 })
 export class AppModule {}
