@@ -18,6 +18,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
 import { AuthGuard } from './auth/auth.guard';
 import { BooksController } from './controllers/books.controller';
+import { RolesGuard } from './auth/role.guard';
 
 console.log(process.env.JWT_SECRET);
 
@@ -47,6 +48,7 @@ console.log(process.env.JWT_SECRET);
     LoggingService,
     CryptService,
     AuthGuard,
+    RolesGuard,
   ],
 })
 export class AppModule {}
