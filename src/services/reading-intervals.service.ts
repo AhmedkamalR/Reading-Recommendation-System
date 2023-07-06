@@ -1,11 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ReadingIntervalRepository } from '../repositories/reading-intervals.repository';
 import { UserService } from '../services/users.service';
 import { BookService } from '../services/books.service';
 import { ReadingInterval } from '../entities/reading-interval.entity';
-import { LoggingService } from '../services/logging.service';
-import { AppError, ErrorMsg } from '../util/error';
+import { AppError } from '../util/error';
 import { ResponseCode } from 'src/util/response';
+import { User } from 'src/entities/user.entity';
 import { Book } from 'src/entities/book.entity';
 
 @Injectable()
@@ -14,7 +14,6 @@ export class ReadingIntervalService {
     private readingIntervalRepository: ReadingIntervalRepository,
     private userService: UserService,
     private bookService: BookService,
-    private loggingService: LoggingService,
   ) {}
 
   async submitReadingInterval(
@@ -44,6 +43,15 @@ export class ReadingIntervalService {
       start_page = isIntersectIntervalExists.end_page;
     }
 
+    await this.saveReadingInterval(user, book, start_page, end_page);
+  }
+
+  async saveReadingInterval(
+    user: User,
+    book: Book,
+    start_page: number,
+    end_page: number,
+  ): Promise<void> {
     const readingInterval = new ReadingInterval();
     readingInterval.user = user;
     readingInterval.book = book;
@@ -58,17 +66,7 @@ export class ReadingIntervalService {
     if (books.length === 0) {
       throw new Error('No top recommended books found');
     }
-    
+
     return books;
   }
 }
-
-// async getNumOfReadPages(bookId: number): Promise<number> {
-//   const readingIntervals =
-//     await this.readingIntervalRepository.getReadingIntervalsByBookId(bookId);
-
-//   return readingIntervals.reduce((sum, interval) => {
-//     return sum + (interval.endPage - interval.startPage + 1);
-//   }, 0);
-// }
-// Intervals (UserId) >> Left Join  Books (BookId) >> Order By ReadCount

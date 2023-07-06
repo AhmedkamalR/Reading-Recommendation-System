@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { LessThan, MoreThan, Repository } from 'typeorm';
 import { ReadingInterval } from '../entities/reading-interval.entity';
 import { Book } from '../entities/book.entity';
-import { User } from '../entities/user.entity';
 
 @Injectable()
 export class ReadingIntervalRepository {

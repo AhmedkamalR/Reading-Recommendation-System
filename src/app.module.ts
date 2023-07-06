@@ -12,13 +12,15 @@ import { Book } from './entities/book.entity';
 import { ReadingInterval } from './entities/reading-interval.entity';
 import { LoggingService } from './services/logging.service';
 import ormconfig from '../config/orm.config.development';
+import { UsersController } from './controllers/users.controller';
+import { CryptService } from './services/crypt.service';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(ormconfig),
     TypeOrmModule.forFeature([User, UserRepository, Book, ReadingInterval]),
   ],
-  controllers: [ReadingRecommendationController],
+  controllers: [ReadingRecommendationController, UsersController],
   providers: [
     UserService,
     UserRepository,
@@ -27,6 +29,7 @@ import ormconfig from '../config/orm.config.development';
     ReadingIntervalService,
     ReadingIntervalRepository,
     LoggingService,
+    CryptService,
   ],
 })
 export class AppModule {}

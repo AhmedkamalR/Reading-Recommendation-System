@@ -11,19 +11,11 @@ export class BookService {
   ) {}
 
   async createBook(name: string, numOfPages: number): Promise<Book> {
-    try {
-      return this.bookRepository.createBook(name, numOfPages);
-    } catch (error) {
-      this.loggingService.error('Failed to create book', error.stack || '');
-    }
+    return this.bookRepository.createBook(name, numOfPages);
   }
 
   async getBookById(id: number): Promise<Book> {
-    try {
-      return this.bookRepository.getBookById(id);
-    } catch (error) {
-      this.loggingService.error('Failed to get book by ID', error.stack || '');
-    }
+    return this.bookRepository.getBookById(id);
   }
 
   async getTopFiveBooks(): Promise<Book[]> {
