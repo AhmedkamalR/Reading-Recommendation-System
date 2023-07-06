@@ -3,8 +3,7 @@ import { ReadingIntervalRepository } from '../repositories/reading-intervals.rep
 import { UserService } from '../services/users.service';
 import { BookService } from '../services/books.service';
 import { ReadingInterval } from '../entities/reading-interval.entity';
-import { AppResponse, ResponseCode } from '../util/response';
-import { AppError, ErrorMsg } from '../util/error';
+import { LoggingService } from '../services/logging.service';
 
 @Injectable()
 export class ReadingIntervalService {
@@ -12,49 +11,66 @@ export class ReadingIntervalService {
     private readingIntervalRepository: ReadingIntervalRepository,
     private userService: UserService,
     private bookService: BookService,
+    private loggingService: LoggingService,
   ) {}
 
   async submitReadingInterval(
-    userId: number,
-    bookId: number,
-    startPage: number,
-    endPage: number,
+    user_id: number,
+    book_id: number,
+    start_page: number,
+    end_page: number,
   ): Promise<void> {
-    const user = await this.userService.getUserById(userId);
-    const book = await this.bookService.getBookById(bookId);
+    try {
+      const user = await this.userService.getUserById(user_id);
+      const book = await this.bookService.getBookById(book_id);
 
-    if (!user || !book) {
-      throw new NotFoundException('User or book not found.');
+      if (!user || !book) {
+        throw new NotFoundException('User or book not found.');
+      }
+      if (start_page > end_page) {
+        throw new Error('Invalid start and end pages');
+      }
+
+      const readingInterval = new ReadingInterval();
+      readingInterval.user = user;
+      readingInterval.book = book;
+      readingInterval.start_page = start_page;
+      readingInterval.end_page = end_page;
+
+      await this.readingIntervalRepository.saveReadingInterval(readingInterval);
+    } catch (error) {
+      this.loggingService.error(
+        'Failed to submit reading interval',
+        error.stack || '',
+      );
+      throw error;
     }
-    if (startPage > endPage) {
-      throw new AppError(ErrorMsg.BAD_REQUEST, ResponseCode.BAD_REQUEST);
-    }
-
-    const readingInterval = new ReadingInterval();
-    readingInterval.user = user;
-    readingInterval.book = book;
-    readingInterval.start_page = startPage;
-    readingInterval.end_page = endPage;
-
-    await this.readingIntervalRepository.saveReadingInterval(readingInterval);
   }
 
-  async getTopRecommendedBooks(userId: number): Promise<AppResponse> {
-    const books = await this.bookService.getTopFiveBooks(userId);
-    if (books.length === 0) {
-      throw new AppError(ErrorMsg.NOT_FOUND, ResponseCode.NOT_FOUND);
+  async getTopRecommendedBooks(user_id: number): Promise<any> {
+    try {
+      const books = await this.bookService.getTopFiveBooks(user_id);
+      if (books.length === 0) {
+        throw new Error('No top recommended books found');
+      }
+
+      return books;
+    } catch (error) {
+      this.loggingService.error(
+        'Failed to get top recommended books',
+        error.stack || '',
+      );
+      throw error;
     }
-
-    return new AppResponse(ResponseCode.SUCCESS, books);
   }
-
-  // async getNumOfReadPages(bookId: number): Promise<number> {
-  //   const readingIntervals =
-  //     await this.readingIntervalRepository.getReadingIntervalsByBookId(bookId);
-
-  //   return readingIntervals.reduce((sum, interval) => {
-  //     return sum + (interval.endPage - interval.startPage + 1);
-  //   }, 0);
-  // }
 }
+
+// async getNumOfReadPages(bookId: number): Promise<number> {
+//   const readingIntervals =
+//     await this.readingIntervalRepository.getReadingIntervalsByBookId(bookId);
+
+//   return readingIntervals.reduce((sum, interval) => {
+//     return sum + (interval.endPage - interval.startPage + 1);
+//   }, 0);
+// }
 // Intervals (UserId) >> Left Join  Books (BookId) >> Order By ReadCount

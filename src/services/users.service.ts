@@ -6,9 +6,9 @@ import { User } from '../entities/user.entity';
 export class UserService {
   constructor(private userRepository: UserRepository) {}
 
-  async createUser(name: string): Promise<User> {
-    return this.userRepository.createUser(name);
-  }
+  // async createUser(name: string): Promise<User> {
+  //   return this.userRepository.createUser(name);
+  // }
 
   async getUserById(id: number): Promise<User> {
     return this.userRepository.getUserById(id);
