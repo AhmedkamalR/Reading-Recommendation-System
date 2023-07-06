@@ -1,7 +1,6 @@
-import { Controller, Post,Body} from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { ReadingIntervalService } from '../services/reading-intervals.service';
 import { AppResponse } from 'src/util/response';
-
 
 @Controller('reading-intervals')
 export class ReadingRecommendationController {
@@ -20,14 +19,11 @@ export class ReadingRecommendationController {
       start_page,
       end_page,
     );
-    return { status_code: 'success'};
+    return { status_code: 'success' };
   }
 
-  @Post('top-books')
- async getTopRecommendedBooks(
-    @Body('user_id') user_id: number,
-  ): Promise<AppResponse> {
-    return this.readingIntervalService.getTopRecommendedBooks(user_id);
+  @Get('top-books')
+  async getTopRecommendedBooks(): Promise<AppResponse> {
+    return this.readingIntervalService.getTopRecommendedBooks();
   }
-  
 }

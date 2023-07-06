@@ -26,12 +26,7 @@ export class BookService {
     }
   }
 
-  async getTopFiveBooks(user_id: number): Promise<Book[]> {
-    try {
-      return this.bookRepository.getTopFiveBooks(user_id);
-    } catch (error) {
-      this.loggingService.error('Failed to get top five books', error.stack || '');
-    }
+  async getTopFiveBooks(): Promise<Book[]> {
+    return this.bookRepository.getTopFiveBooks();
   }
 }
-

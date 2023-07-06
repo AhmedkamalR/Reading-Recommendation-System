@@ -21,12 +21,16 @@ export class BookRepository {
     return this.bookRepository.findOne({ where: { id } });
   }
 
-  async getTopFiveBooks(userId: number): Promise<Book[]> {
+  async getTopFiveBooks(): Promise<Book[]> {
     return await this.bookRepository.query(`
-    SELECT book_id, name, "numOfPages", end_page - start_page AS num_of_read_pages 
+    SELECT book_id, name, "numOfPages" AS num_of_pages, SUM(end_page - start_page) AS num_of_read_pages 
+
     FROM reading_interval
+
     LEFT JOIN book ON reading_interval.book_id = book.id
-    WHERE user_id = ${userId}
+
+    GROUP BY book_id, name, num_of_pages
+
     ORDER BY num_of_read_pages DESC LIMIT 5`);
   }
 }
