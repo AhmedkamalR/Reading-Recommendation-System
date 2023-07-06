@@ -17,6 +17,7 @@ import { CryptService } from './services/crypt.service';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
 import { AuthGuard } from './auth/auth.guard';
+import { BooksController } from './controllers/books.controller';
 
 console.log(process.env.JWT_SECRET);
 
@@ -31,7 +32,11 @@ console.log(process.env.JWT_SECRET);
       signOptions: { expiresIn: '10h' },
     }),
   ],
-  controllers: [ReadingRecommendationController, UsersController],
+  controllers: [
+    ReadingRecommendationController,
+    UsersController,
+    BooksController,
+  ],
   providers: [
     UserService,
     UserRepository,

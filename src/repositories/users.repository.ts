@@ -13,11 +13,6 @@ export class UserRepository {
     private cryptService: CryptService,
   ) {}
 
-  //   async createUser(name: string): Promise<User> {
-  //     const user = new User();
-  //     user.user = name;
-  //     return this.userRepository.save(user);
-  //   }
   async getUserByname(username: string): Promise<User> {
     return this.userRepository.findOne({ where: { username } });
   }

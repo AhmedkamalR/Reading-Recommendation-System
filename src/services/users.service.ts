@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../repositories/users.repository';
 import { User } from '../entities/user.entity';
-import { AppError } from 'src/util/error';
-import { ResponseCode } from 'src/util/response';
+import { AppError } from '../util/error';
+import { ResponseCode } from '../util/response';
 import * as bcrypt from 'bcrypt';
-import { UserRequestDto, UserResponseDto } from 'src/auth/dto/user.dto';
+import { UserRequestDto, UserResponseDto } from '../dto/user.dto';
 import { CryptService } from './crypt.service';
 
 @Injectable()

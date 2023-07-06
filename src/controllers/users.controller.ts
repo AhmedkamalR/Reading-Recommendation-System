@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { UserService } from '../services/users.service';
-import { UserRequestDto } from 'src/auth/dto/user.dto';
+import { UserRequestDto } from '../dto/user.dto';
 
 @Controller('auth')
 export class UsersController {
@@ -17,10 +17,5 @@ export class UsersController {
     @Body('password') password: string,
   ) {
     return this.usersService.signUp(username, password);
-  }
-
-  @Get()
-  async getAllUsers(): Promise<any> {
-    return this.usersService.getUserById(1);
   }
 }

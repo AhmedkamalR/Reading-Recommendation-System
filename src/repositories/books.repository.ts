@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Book } from '../entities/book.entity';
+import { BookRequestDto } from '../dto/book.dto';
 
 @Injectable()
 export class BookRepository {
@@ -10,11 +11,8 @@ export class BookRepository {
     private bookRepository: Repository<Book>,
   ) {}
 
-  async createBook(name: string, numOfPages: number): Promise<Book> {
-    const book = new Book();
-    book.name = name;
-    book.numOfPages = numOfPages;
-    return this.bookRepository.save(book);
+  async createBook(bookRequestDto: BookRequestDto): Promise<Book> {
+    return this.bookRepository.save({ ...bookRequestDto });
   }
 
   async getBookById(id: number): Promise<Book> {

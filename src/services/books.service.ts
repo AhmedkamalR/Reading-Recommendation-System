@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { BookRepository } from '../repositories/books.repository';
 import { Book } from '../entities/book.entity';
 import { LoggingService } from '../services/logging.service';
+import { BookRequestDto } from '../dto/book.dto';
 
 @Injectable()
 export class BookService {
@@ -10,8 +11,8 @@ export class BookService {
     private loggingService: LoggingService,
   ) {}
 
-  async createBook(name: string, numOfPages: number): Promise<Book> {
-    return this.bookRepository.createBook(name, numOfPages);
+  async createBook(bookRequestDto: BookRequestDto): Promise<Book> {
+    return this.bookRepository.createBook(bookRequestDto);
   }
 
   async getBookById(id: number): Promise<Book> {

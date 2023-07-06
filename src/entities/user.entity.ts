@@ -6,9 +6,6 @@ export enum UserRoles {
 }
 @Entity()
 export class User {
-  save() {
-    throw new Error('Method not implemented.');
-  }
   @PrimaryGeneratedColumn()
   id: number;
 
