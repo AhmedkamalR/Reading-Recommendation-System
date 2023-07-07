@@ -4,7 +4,7 @@ import { User } from '../entities/user.entity';
 import { AppError } from '../util/error';
 import { ResponseCode } from '../util/response';
 import * as bcrypt from 'bcrypt';
-import { UserRequestDto, UserResponseDto } from '../dto/user.dto';
+import { UserRequestDto, UserResponseDto, SignupResponseDto } from '../dto/user.dto';
 import { CryptService } from './crypt.service';
 
 @Injectable()
@@ -22,6 +22,9 @@ export class UserService {
     if (!user) {
       throw new AppError('User not Found', ResponseCode.NOT_FOUND);
     }
+    if(!password){
+      throw new AppError('password not Found', ResponseCode.BAD_REQUEST);
+    }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
@@ -31,17 +34,18 @@ export class UserService {
     return new UserResponseDto(user, token);
   }
 
-  async signUp(username: string, password: string): Promise<UserResponseDto> {
+  async signUp(username: string, password: string): Promise<SignupResponseDto> {
     const user = await this.userRepository.getUserByname(username);
     if (user) {
-      const token = await this.cryptService.generateAuthToken(user);
-      return new UserResponseDto(user, token);
+      throw new AppError('User Already Exists', ResponseCode.BAD_REQUEST);
     }
 
+    if(!password){
+      throw new AppError('password not Found', ResponseCode.BAD_REQUEST);
+    }
+    
     const newUser = await this.userRepository.createUser(username, password);
-    const token = await this.cryptService.generateAuthToken(user);
-
-    return new UserResponseDto(newUser, token);
+    return new SignupResponseDto(newUser);
   }
 
   async getUserById(id: number): Promise<User> {
