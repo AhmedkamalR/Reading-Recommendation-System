@@ -4,7 +4,7 @@ import { User } from '../entities/user.entity';
 import { AppError } from '../util/error';
 import { ResponseCode } from '../util/response';
 import * as bcrypt from 'bcrypt';
-import { UserRequestDto, UserResponseDto } from '../dto/user.dto';
+import { UserRequestDto, UserResponseDto, SignupResponseDto } from '../dto/user.dto';
 import { CryptService } from './crypt.service';
 
 @Injectable()
@@ -38,9 +38,7 @@ export class UserService {
     }
 
     const newUser = await this.userRepository.createUser(username, password);
-    const token = await this.cryptService.generateAuthToken(user);
-
-    return new UserResponseDto(newUser, token);
+    return new SignupResponseDto(newUser);
   }
 
   async getUserById(id: number): Promise<User> {
