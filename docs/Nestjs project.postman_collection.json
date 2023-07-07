@@ -1,0 +1,560 @@
+{
+	"info": {
+		"_postman_id": "abdec29e-f3dd-4ac3-afac-69e65a5418e0",
+		"name": "Nestjs project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25426691",
+		"_collection_link": "https://gold-space-191705.postman.co/workspace/New-Team-Workspace~956a4331-cc18-4998-82e8-68cd32d5c9a3/collection/25426691-abdec29e-f3dd-4ac3-afac-69e65a5418e0?action=share&creator=25426691&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ahmedkamal2\",\r\n    \"password\": \"test123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ahmedkamal\",\r\n    \"password\": \"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "signin",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"ahmedkamal262\",\r\n    \"password\": \"test123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "360"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"168-za0x+GML2PPZyrIkoT1vNIz/QRs\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 07 Jul 2023 10:50:25 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"ahmedkamal2\",\n    \"role\": \"user\",\n    \"id\": 15,\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE1LCJpZCI6MTUsInVzZXJuYW1lIjoiYWhtZWRrYW1hbDIiLCJwYXNzd29yZCI6IiQyYiQxMCRzakVHd1RwN2xOL01Fem10SmFvT1lPaTlSNzlUYm1KL0VZMnRpVmxka24yWWVsVEozUnU4LiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjg4NzI3MDI1LCJleHAiOjE2ODg3NjMwMjV9.0SePqJWEV02wJFfo5FgQURsoXgncg8vjjZctxC7GmSE\"\n}"
+				}
+			]
+		},
+		{
+			"name": "submit interval",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE1LCJpZCI6MTUsInVzZXJuYW1lIjoiYWhtZWRrYW1hbDIiLCJwYXNzd29yZCI6IiQyYiQxMCRzakVHd1RwN2xOL01Fem10SmFvT1lPaTlSNzlUYm1KL0VZMnRpVmxka24yWWVsVEozUnU4LiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjg4NzI3MDI1LCJleHAiOjE2ODg3NjMwMjV9.0SePqJWEV02wJFfo5FgQURsoXgncg8vjjZctxC7GmSE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"user_id\": \"15\",\r\n  \"book_id\": \"1\",\r\n  \"start_page\": 25,\r\n  \"end_page\": 45\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/reading-intervals/submit-interval",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"reading-intervals",
+						"submit-interval"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "submit interval",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": \"15\",\r\n  \"book_id\": \"1\",\r\n  \"start_page\": 25,\r\n  \"end_page\": 45\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/reading-intervals/submit-interval",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reading-intervals",
+								"submit-interval"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"19-+QDzpLS3RTMd6ncGf7W6Lcr7xko\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 07 Jul 2023 10:56:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": \"success\"\n}"
+				}
+			]
+		},
+		{
+			"name": "reading-intervals/top-books",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJpZCI6MTIsInVzZXJuYW1lIjoiZXNsYW0iLCJwYXNzd29yZCI6IiQyYiQxMCR6YnFkSzZ5T2hyOUhPT0t3RFY3MlpPQ2lNQi9ET01iNEJKLi5pdmwwbi5NOS5RMkVNTi4uVyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjg4Njc5NzE0LCJleHAiOjE2ODg3MTU3MTR9.f2vtY0pQVjk0_-q_hdBooiFahGEWy_wMbmNJrpx30yk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "access_token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJpZCI6MTIsInVzZXJuYW1lIjoiZXNsYW0iLCJwYXNzd29yZCI6IiQyYiQxMCR6YnFkSzZ5T2hyOUhPT0t3RFY3MlpPQ2lNQi9ET01iNEJKLi5pdmwwbi5NOS5RMkVNTi4uVyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjg4Njc5NzE0LCJleHAiOjE2ODg3MTU3MTR9.f2vtY0pQVjk0_-q_hdBooiFahGEWy_wMbmNJrpx30yk",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/reading-intervals/top-books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"reading-intervals",
+						"top-books"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "reading-intervals/top-books",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJpZCI6MTIsInVzZXJuYW1lIjoiZXNsYW0iLCJwYXNzd29yZCI6IiQyYiQxMCR6YnFkSzZ5T2hyOUhPT0t3RFY3MlpPQ2lNQi9ET01iNEJKLi5pdmwwbi5NOS5RMkVNTi4uVyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjg4Njc5NzE0LCJleHAiOjE2ODg3MTU3MTR9.f2vtY0pQVjk0_-q_hdBooiFahGEWy_wMbmNJrpx30yk",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/reading-intervals/top-books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reading-intervals",
+								"top-books"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "384"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"180-NiqK3cD9X9PN+YhAZyCEEfU5oW4\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 07 Jul 2023 12:26:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"book_id\": 1,\n        \"name\": \"Clean Code\",\n        \"num_of_pages\": 200,\n        \"num_of_read_pages\": \"110\"\n    },\n    {\n        \"book_id\": 5,\n        \"name\": \"SQL\",\n        \"num_of_pages\": 250,\n        \"num_of_read_pages\": \"90\"\n    },\n    {\n        \"book_id\": 3,\n        \"name\": \"Clean Code4\",\n        \"num_of_pages\": 410,\n        \"num_of_read_pages\": \"80\"\n    },\n    {\n        \"book_id\": 4,\n        \"name\": \"testing\",\n        \"num_of_pages\": 300,\n        \"num_of_read_pages\": \"80\"\n    },\n    {\n        \"book_id\": 2,\n        \"name\": \"Clean Code2\",\n        \"num_of_pages\": 410,\n        \"num_of_read_pages\": \"80\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Add Book",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlkIjoxLCJ1c2VybmFtZSI6ImFobWVka2FtYWwiLCJwYXNzd29yZCI6IiQyYiQxMCR6YnFkSzZ5T2hyOUhPT0t3RFY3MlpPQ2lNQi9ET01iNEJKLi5pdmwwbi5NOS5RMkVNTi4uVyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4ODczMTYxMywiZXhwIjoxNjg4NzY3NjEzfQ.rfcSxcIXxDJo7otEEp0P-rCcuxSWhPIE9bWTqeJQSNQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Clean Code3\",\r\n    \"numOfPages\":200\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add Book",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Clean Code3\",\r\n    \"numOfPages\":200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"books"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "47"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2f-vdUH8hlgAS4p67O8aD8SvNwrxI4\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 07 Jul 2023 12:07:25 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Clean Code3\",\n    \"numOfPages\": 200,\n    \"id\": 15\n}"
+				}
+			]
+		},
+		{
+			"name": "modify book",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlkIjoxLCJ1c2VybmFtZSI6ImFobWVka2FtYWwiLCJwYXNzd29yZCI6IiQyYiQxMCR6YnFkSzZ5T2hyOUhPT0t3RFY3MlpPQ2lNQi9ET01iNEJKLi5pdmwwbi5NOS5RMkVNTi4uVyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4ODczMTYxMywiZXhwIjoxNjg4NzY3NjEzfQ.rfcSxcIXxDJo7otEEp0P-rCcuxSWhPIE9bWTqeJQSNQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Clean Code4\",\r\n    \"numOfPages\":410\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/books/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "modify book",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Clean Code4\",\r\n    \"numOfPages\":410\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/books/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"books",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2e-UwmmNgkmsXRc0cudGhFojUmqHy4\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 07 Jul 2023 12:08:15 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 3,\n    \"name\": \"Clean Code4\",\n    \"numOfPages\": 410\n}"
+				}
+			]
+		}
+	]
+}
