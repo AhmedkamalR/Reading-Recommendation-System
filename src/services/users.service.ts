@@ -34,8 +34,7 @@ export class UserService {
   async signUp(username: string, password: string): Promise<UserResponseDto> {
     const user = await this.userRepository.getUserByname(username);
     if (user) {
-      const token = await this.cryptService.generateAuthToken(user);
-      return new UserResponseDto(user, token);
+      throw new AppError('User Already Exists', ResponseCode.BAD_REQUEST);
     }
 
     const newUser = await this.userRepository.createUser(username, password);
