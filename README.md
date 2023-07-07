@@ -61,7 +61,7 @@ Alternatively, you can download the source code as a ZIP file and extract it.
 The API server will start running at http://localhost:3000.
 
 ## Usage
-
+- You can find postman collection in docs/Nestjs project.postman_collection.json in the repositry
 - Register a new user by sending a POST request to /auth/signup with the following payload:
  ![sign up](https://github.com/AhmedkamalR/reading-recommendation-system/assets/87860547/f134972f-66d8-418a-8447-4b78d50acf32)
 
