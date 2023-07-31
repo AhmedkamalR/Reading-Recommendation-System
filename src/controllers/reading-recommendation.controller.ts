@@ -52,8 +52,6 @@ export class ReadingRecommendationController {
   @UseGuards(AuthGuard)
   @Get('top-books-v2')
   async getTopRecommendedBooksV2(): Promise<AppResponse> {
-    return this.readingIntervalService.getTopRecommendedBooks();
+    return this.BookReadsService.getTopRecommendedBooks();
   }
-
-  
 }

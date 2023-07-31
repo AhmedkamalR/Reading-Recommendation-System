@@ -58,6 +58,7 @@ export class BookReadsService {
       start_page = max;
     }
 
+    if (start_page === end_page) return;
     await this.saveReadingInterval(book, start_page, end_page);
   }
 
@@ -75,7 +76,7 @@ export class BookReadsService {
   }
 
   async getTopRecommendedBooks(): Promise<any> {
-    const books = await this.bookService.getTopFiveBooks();
+    const books = await this.bookReadsRepository.getTopFiveBooks();
     if (books.length === 0) {
       throw new Error('No top recommended books found');
     }

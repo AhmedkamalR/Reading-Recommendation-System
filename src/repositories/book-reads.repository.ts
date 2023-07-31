@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
-  LessThan,
   LessThanOrEqual,
   MoreThan,
   MoreThanOrEqual,
@@ -17,16 +16,6 @@ export class BookReadsRepository {
     @InjectRepository(BookRead)
     private bookReadsRepository: Repository<BookRead>,
   ) {}
-
-  async intersectInterval(start: number, book: Book): Promise<BookRead> {
-    return await this.bookReadsRepository.findOne({
-      where: {
-        book,
-        start_page: LessThan(start), // Intersect for user
-        end_page: MoreThan(start), // Intersect for user
-      },
-    });
-  }
 
   async isReadAlreadyExists(
     start: number,
@@ -87,5 +76,18 @@ export class BookReadsRepository {
     return this.bookReadsRepository.find({
       where: { book: { id: bookId } },
     });
+  }
+
+  async getTopFiveBooks(): Promise<Book[]> {
+    return await this.bookReadsRepository.query(`
+    SELECT book_id, name, "numOfPages" AS num_of_pages, SUM(end_page - start_page) AS num_of_read_pages 
+
+    FROM book_read
+
+    LEFT JOIN book ON book_read.book_id = book.id
+
+    GROUP BY book_id, name, num_of_pages
+
+    ORDER BY num_of_read_pages DESC LIMIT 5`);
   }
 }
