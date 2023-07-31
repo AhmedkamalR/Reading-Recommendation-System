@@ -19,14 +19,21 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthGuard } from './auth/auth.guard';
 import { BooksController } from './controllers/books.controller';
 import { RolesGuard } from './auth/role.guard';
-
-console.log(process.env.JWT_SECRET);
+import { BookRead } from './entities/book-read.entity';
+import { BookReadsRepository } from './repositories/book-reads.repository';
+import { BookReadsService } from './services/book-reads.service';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(ormconfig),
-    TypeOrmModule.forFeature([User, UserRepository, Book, ReadingInterval]),
+    TypeOrmModule.forFeature([
+      User,
+      UserRepository,
+      Book,
+      ReadingInterval,
+      BookRead,
+    ]),
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET || 'JWT_SECRET',
@@ -49,6 +56,8 @@ console.log(process.env.JWT_SECRET);
     CryptService,
     AuthGuard,
     RolesGuard,
+    BookReadsRepository,
+    BookReadsService,
   ],
 })
 export class AppModule {}

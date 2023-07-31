@@ -31,7 +31,13 @@ export class ReadingIntervalService {
     if (start_page > end_page) {
       throw new Error('Invalid start and end pages');
     }
+    // 1-Happy Scenario
+    // 0 >> 30
+    // 50 >> 60
 
+    // 2- Intersect
+    // 10 >> 60
+    // 30 >> 70 >> Convert >> (60 >> 70) >> Save in DB
     const isIntersectIntervalExists =
       await this.readingIntervalRepository.intersectInterval(
         start_page,
@@ -70,3 +76,8 @@ export class ReadingIntervalService {
     return books;
   }
 }
+
+// Dependency Injection
+// 1- Singleton From Class >> One Object only in Memory
+// 2- Inject Object in Constructor
+

@@ -20,8 +20,8 @@ export class ReadingIntervalRepository {
       where: {
         book,
         user,
-        start_page: LessThan(start),
-        end_page: MoreThan(start),
+        start_page: LessThan(start), // Intersect for user
+        end_page: MoreThan(start), // Intersect for user
       },
     });
   }
