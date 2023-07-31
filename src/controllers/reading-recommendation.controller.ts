@@ -8,7 +8,7 @@ import { BookReadsService } from './../services/book-reads.service';
 export class ReadingRecommendationController {
   constructor(
     private readingIntervalService: ReadingIntervalService,
-    private BookReadsService: BookReadsService,
+    private bookReadsService: BookReadsService,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -41,7 +41,7 @@ export class ReadingRecommendationController {
     @Body('start_page') start_page: number,
     @Body('end_page') end_page: number,
   ): Promise<{ status_code: string }> {
-    await this.BookReadsService.submitReadingInterval(
+    await this.bookReadsService.submitReadingInterval(
       book_id,
       start_page,
       end_page,
@@ -52,6 +52,6 @@ export class ReadingRecommendationController {
   @UseGuards(AuthGuard)
   @Get('top-books-v2')
   async getTopRecommendedBooksV2(): Promise<AppResponse> {
-    return this.BookReadsService.getTopRecommendedBooks();
+    return this.bookReadsService.getTopRecommendedBooks();
   }
 }
