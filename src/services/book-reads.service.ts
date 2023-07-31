@@ -19,7 +19,6 @@ export class BookReadsService {
     end_page: number,
   ): Promise<void> {
     const book = await this.bookService.getBookById(book_id);
-
     if (!book) {
       throw new AppError('User or book not found.', ResponseCode.NOT_FOUND);
     }
@@ -27,11 +26,36 @@ export class BookReadsService {
       throw new Error('Invalid start and end pages');
     }
 
-    const isIntersectIntervalExists =
-      await this.bookReadsRepository.intersectInterval(start_page, book);
+    const isReadAlreadyExistsWithinRange =
+      await this.bookReadsRepository.isReadAlreadyExists(
+        start_page,
+        end_page,
+        book,
+      );
+    if (isReadAlreadyExistsWithinRange) return;
+    const { max } = await this.bookReadsRepository.getMaxPageRead(book);
+    const { min } = await this.bookReadsRepository.getMinPageRead(book);
 
-    if (isIntersectIntervalExists) {
-      start_page = isIntersectIntervalExists.end_page;
+    if (!min && !max)
+      return await this.saveReadingInterval(book, start_page, end_page);
+
+    const newEndPageNotExceedMaxLimit =
+      await this.bookReadsRepository.newEndPageNotExceedLimit(end_page, book);
+    const newStartPageNotExceedMinLimit =
+      await this.bookReadsRepository.newStartPageNotExceedMinLimit(
+        start_page,
+        book,
+      );
+
+    if (newEndPageNotExceedMaxLimit && newStartPageNotExceedMinLimit) return;
+
+    // Handle Small Boundaries
+    if (!newStartPageNotExceedMinLimit) {
+      await this.saveReadingInterval(book, start_page, min);
+    }
+    // End Page New
+    if (!newEndPageNotExceedMaxLimit) {
+      start_page = max;
     }
 
     await this.saveReadingInterval(book, start_page, end_page);
